@@ -1,0 +1,55 @@
+<template>
+    <div>
+      <label for="startDate">Data de início:</label>
+      <input v-model="startDate" type="date" id="startDate" @input="validateStartDate" />
+  
+      <label for="endDate">Data de término:</label>
+      <input v-model="endDate" type="date" id="endDate" :class="{ 'is-invalid': $v.endDate.$error }" />
+  
+      <div v-if="!$v.endDate.$pending && !$v.endDate.$error">
+        <p>Data válida!</p>
+      </div>
+      <div v-if="$v.endDate.$pending">
+        <p>Validando...</p>
+      </div>
+      <div v-if="$v.endDate.$error">
+        <p>Data inválida! Certifique-se de que o ano da data de término é maior que o ano da data de início.</p>
+      </div>
+    </div>
+  </template>
+  
+  <script type="module">
+    import { ref, watch } from 'vue';
+    import { required, date } from '@vuelidate/core/validators';
+  
+    export default {
+      data() {
+        return {
+          startDate: null,
+          endDate: null,
+        };
+      },
+      validations: {
+        endDate: {
+          required,
+          date,
+        },
+      },
+      methods: {
+        validateStartDate() {
+          this.$v.endDate.$touch();
+        },
+      },
+      watch: {
+        startDate() {
+          this.validateStartDate();
+        },
+      },
+    };
+  </script>
+  
+  <style>
+  .is-invalid {
+    border: 1px solid red;
+  }
+  </style>
