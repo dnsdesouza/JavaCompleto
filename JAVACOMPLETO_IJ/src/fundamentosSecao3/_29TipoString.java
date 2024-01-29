@@ -37,7 +37,7 @@ public class _29TipoString {
 //
 //                git init
 //                git branch
-//                commit -m "atualização aula 29  completo 28Jan"
+//                git commit -m "atualização aula 29  completo 28Jan"
 //                git push origin master  # ou a branch desejada
 //                git add .
 //                git push origin master
